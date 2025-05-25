@@ -2,11 +2,11 @@
 
 ## 项目简介
 
-**吵架包赢神器** 是一个专为王者荣耀玩家打造的AI智能回怼工具网站。通过强大的DeepSeek V3 AI模型，帮助玩家生成机智、有力的回击内容，让你在游戏聊天中永远占据上风！
+**吵架包赢神器** 是一个专为王者荣耀玩家打造的AI智能回怼工具网站。通过强大的Qwen2.5-VL-72B AI模型，帮助玩家生成机智、有力的回击内容，让你在游戏聊天中永远占据上风！
 
 ### ✨ 功能特色
 
-- 🤖 **AI智能生成** - 基于DeepSeek V3模型，生成3条不同风格的回击内容
+- 🤖 **AI智能生成** - 基于Qwen2.5-VL-72B模型，生成3条不同风格的回击内容
 - 🎚️ **语气强度调节** - 1-10级可调节滑动条，从温和回应到激烈反击
 - 📱 **响应式设计** - 完美适配手机和电脑端，王者荣耀风格UI
 - 💾 **本地历史记录** - 自动保存使用历史，最多保留50条记录
@@ -46,7 +46,7 @@ npm run dev
 
 - **框架**: Next.js 14 + TypeScript
 - **样式**: Tailwind CSS + 自定义CSS
-- **AI模型**: OpenRouter DeepSeek V3
+- **AI模型**: SiliconFlow Qwen2.5-VL-72B
 - **存储**: localStorage (本地存储)
 - **部署**: Vercel
 
@@ -101,11 +101,28 @@ npm run lint     # 代码检查
 ```
 
 ### API配置
-本项目使用OpenRouter的DeepSeek V3模型。如需自定义配置，可在 `src/lib/ai-client.ts` 中修改：
+本项目使用SiliconFlow的Qwen2.5-VL-72B模型。
+
+#### 环境变量配置
+为了安全起见，API密钥通过环境变量配置：
+
+**本地开发**：
+创建 `.env.local` 文件：
+```bash
+SILICONFLOW_API_KEY=your-api-key-here
+```
+
+**Vercel部署**：
+在Vercel控制台的Environment Variables中添加：
+- Name: `SILICONFLOW_API_KEY`
+- Value: 你的API密钥
+
+#### 代码配置
+如需修改模型或其他配置，可在 `src/app/api/generate/route.ts` 中修改：
 
 ```typescript
-const API_KEY = 'your-api-key';
-const MODEL = 'deepseek/deepseek-chat';
+const API_KEY = process.env.SILICONFLOW_API_KEY || 'fallback-key';
+const MODEL = 'Qwen/Qwen2.5-VL-72B-Instruct';
 ```
 
 ## 📝 更新日志
